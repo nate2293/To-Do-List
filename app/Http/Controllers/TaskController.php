@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use id;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 use function Laravel\Prompts\task;
 
@@ -13,29 +15,29 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
         // Retrieve only tasks belonging to the logged-in user
         $tasks = Task::where('user_id', auth()->id())
             ->orderBy('created_at', 'desc')
             ->paginate(4);
+
         return view('tasks.index', compact('tasks'));
     }
-
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        // 
+        //
         return view('tasks.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         // Validate the incoming request data
         $validatedData = $request->validate([
@@ -67,26 +69,26 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): View
     {
         // Find the task by ID and pass it to the view
         $task = Task::findOrFail($id);
+
         return view('tasks.show', compact('task'));
     }
-
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): View
     {
         // Find the task by ID and pass it to the view
         $task = Task::findOrFail($id);
+
         return view('tasks.edit', compact('task'));
     }
 
-
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): RedirectResponse
     {
         $validatedData = $request->validate([
             // Validation rules for the task fields
@@ -109,7 +111,7 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
         // Find the task by ID and delete it
         $task = Task::findOrFail($id);

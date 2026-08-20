@@ -3,16 +3,15 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Task;
+use Illuminate\Database\Seeder;
 
 class TaskSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
-    
-    protected $model = Task::class;
+    protected string $model = Task::class;
 
     public function run(): void
     {

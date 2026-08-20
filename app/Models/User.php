@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -14,7 +14,6 @@ use Illuminate\Support\Str;
 use Laravel\Fortify\Contracts\PasskeyUser;
 use Laravel\Fortify\PasskeyAuthenticatable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Prompts\Task;
 
 /**
  * @property int $id
@@ -41,7 +40,6 @@ class User extends Authenticatable implements PasskeyUser
      *
      * @return array<string, string>
      */
-
     protected $fillable = [
         'name',
         'email',
@@ -64,11 +62,16 @@ class User extends Authenticatable implements PasskeyUser
         $initials = Str::initials($this->name, true);
 
         return Str::length($initials) > 1
-            ? Str::substr($initials, 0, 1) . Str::substr($initials, -1)
+            ? Str::substr($initials, 0, 1).Str::substr($initials, -1)
             : $initials;
     }
 
-    public function tasks()
+    /**
+     * Get the tasks belonging to the user.
+     *
+     * @return HasMany<Task, $this>
+     */
+    public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
     }
