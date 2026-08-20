@@ -79,7 +79,7 @@ To get a local copy of this project up and running, follow these steps.
 
 Make sure you have the following installed:
 
-- **PHP 8.3 or higher**
+- **PHP 8.4.1 or higher**
 - **Composer**
 - **Node.js**
 - **npm**
