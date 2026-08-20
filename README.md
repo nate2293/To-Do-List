@@ -12,6 +12,9 @@
 ![PHPUnit](https://img.shields.io/badge/PHPUnit-Testing-3C9CD7?style=for-the-badge&logo=php&logoColor=white)
 
 <img src ="./docs/images/landing-page.png" width="95%">
+<img src ="./docs/images/task-page.png" width="95%">
+<img src ="./docs/images/create-task.png" width="95%">
+<img src ="./docs/images/delete-task.png" width="95%">
 
 </div>
 
